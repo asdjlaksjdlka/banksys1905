@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+
+<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">开始日期</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="beginTime" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label"> 结束日期</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="endTime" placeholder="yyyy-MM-dd">
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+
+<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript" src="layui/layui.js"></script>
+
+<script>
+    layui.use(['laydate','table'], function() {
+            var laydate = layui.laydate;
+            var table = layui.table;
+
+            //常规用法
+            laydate.render({
+                elem: '#beginTime'
+            });
+            laydate.render({
+                elem: '#endTime'
+            });
+
+        //执行一个 table 实例
+        table.render({
+            elem: '#demo'
+            ,height: 420
+            ,url: 'transferinfo.do' //数据接口
+            ,title: '用户表'
+            ,page: true //开启分页
+            //,toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            //,totalRow: true //开启合计行
+            ,cols: [[ //表头
+
+                {field: 'createTime', title: '创建日期', width:80, sort: true, fixed: 'left'}
+                ,{field: 'income', title: '收入', width:80}
+                ,{field: 'output', title: '支出', width:80, sort: true}
+                ,{field: 'consumType', title: '消费类型', width:80, sort: true}
+                ,{field: 'balance', title: '余额', width:80, sort: true}
+                ,{field: 'comment', title: '备注', width:80, sort: true}
+            ]]
+        });
+        });
+</script>
+
+
+</body>
+</html>
